@@ -8,11 +8,13 @@ export default {
 		},
 		extend: {
 			colors: {
-				"primery": "#ff5c35",
-				"primery-light": "#fef4ea",
-				"primery-transparent": "#ff5c3538",
+				"primary": "#ff5c35",
+				"primary-light": "#fef4ea",
+				"primary-dark": "#f52f00",
+				"primary-transparent": "#ff5c3538",
 				"secondary": "#213343",
 				"secondary-light": "#3e5974",
+				"secondary-dark": "#0c263d",
 				"secondary-transparent": "#eaf0f6",
 			},
 			screens: {

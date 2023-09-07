@@ -1,10 +1,15 @@
 import React from "react";
 
-const ShopIN: React.FC = () => {
+interface PropType {
+	width?: string;
+	height?: string;
+}
+
+const ShopIN: React.FC<PropType> = (props) => {
 	return (
 		<svg
-			width="889"
-			height="250"
+			width={props.width ?? "400"}
+			height={props.height ?? "200"}
 			viewBox="0 0 889 250"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg">
@@ -26,8 +31,8 @@ const ShopIN: React.FC = () => {
 					width="887.977"
 					height="249.091"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB">
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					colorInterpolationFilters="sRGB">
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"

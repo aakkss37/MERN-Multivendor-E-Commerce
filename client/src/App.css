@@ -1,5 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
-* {
+body {
 	font-family: 'Ubuntu', sans-serif;
+	scroll-behavior: smooth;
+	user-select: none;
+	background-color: #fffbf9;
+
 }
+
+input, select {
+	outline: none;
+}
+
+::-webkit-scrollbar-track {
+	background: #81818142;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #3ab2bb;
+	border-radius: 4px;
+}
+
+/* For Firefox */
+::-moz-scrollbar {
+	width: 3px;
+	height: 5px;
+	border-radius: 4px;
+}
+
+::-moz-scrollbar-track {
+	background: #163141;
+	border-radius: 4px;
+}
+
+::-moz-scrollbar-thumb {
+	background: #3ab2bb;
+	border-radius: 4px;
+}
+
+/* div {
+	border: 1px solid red
+} */

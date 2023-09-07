@@ -1,10 +1,17 @@
 import React from "react";
 import "./App.css"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {LoginPage} from "./Routes"
 
 const App: React.FC = () => {
-	return <div className="w-full h-20 border border-red-600">
-		<p className="text-neutral-200 bg-slate-600">Hello world</p>
-	</div>;
+	return(
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<LoginPage />} />
+				<Route path="/login" element={<LoginPage />} />
+			</Routes>
+		</BrowserRouter>
+	)
 };
 
 export default App;
