@@ -7,6 +7,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import TermsAndCondition from "../../static/TermsAndCondition";
+import InputText from "../../UI/InputText";
 
 interface UserInputType {
 	displayName: string;
@@ -35,7 +36,51 @@ const Signup: React.FC = () => {
 	const handleUserInput = (name: string, value: string) => {
 		setUserInput((props) => ({ ...props, [name]: value }));
 	};
-	const handleCreateAccount = () => {};
+
+	const validateForm = () => {
+		const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+		const displayNamePattern = /^[a-zA-Z ]{3,}$/;
+		const passwordPattern =
+			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+		if (!emailPattern.test(userInput.email)) {
+			alert("Please enter a valid email address.");
+			return false;
+		}
+
+		if (userInput.password !== userInput.conformPassword) {
+			alert("Passwords do not match.");
+			return false;
+		}
+
+		if (userInput.displayName.length <= 3) {
+			alert("Display name must be at least 3 characters long.");
+			return false;
+		}
+		if (!displayNamePattern.test(userInput.displayName)) {
+			alert("Only letters, and spaces are allowed.");
+			return false;
+		}
+
+		if (!passwordPattern.test(userInput.password)) {
+			alert(
+				"Password must have at least 8 characters, at least 1 special character, and at least 1 numeric value."
+			);
+			return false;
+		}
+
+		// All validation checks passed
+		return true;
+	};
+
+	const handleCreateAccount = () => {
+		const isValid = validateForm();
+		if (isValid) {
+			// Perform registration logic here
+			// This function will only be called if the form is valid
+			console.log();
+		}
+	};
 	return (
 		<div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 px-4 ">
 			<div className="mx-auto w-full max-w-sm">
@@ -57,7 +102,6 @@ const Signup: React.FC = () => {
 				</div>
 				{/* LOGIN FORM */}
 				<form className="my-10 flex flex-col sm:gap-6 gap-2">
-
 					{/* PROFILE PICTURE */}
 					<div className="flex justify-center mt-4">
 						<div className="flex flex-col items-center">
@@ -84,50 +128,34 @@ const Signup: React.FC = () => {
 
 					{/* DISPLAY NAME INPUT */}
 					<div>
-						<label
-							htmlFor="displayName"
-							className="block text-sm font-medium text-neutral-500 pl-[2px]">
-							Dispaly Name
-						</label>
-						<div className="mt-1">
-							<input
-								type="displayName"
-								name="displayName"
-								autoComplete="none"
-								required
-								value={userInput.displayName}
-								onChange={(e) =>
-									handleUserInput(
-										e.target.name,
-										e.target.value
-									)
-								}
-								className={styles.inputStyle}
-							/>
-						</div>
+						<InputText
+							label="Display Name"
+							name="displayName"
+							autoComplete="none"
+							required={true}
+							error={true}
+							erroeMsg="Display name must be at least 3 characters long."
+							value={userInput.displayName}
+							onChange={(name, value) =>
+								handleUserInput(name, value)
+							}
+						/>
 					</div>
 
 					{/* EMAIL INPUT */}
 					<div>
-						<label
-							htmlFor="email"
-							className="block text-sm font-medium text-neutral-500 pl-[2px]">
-							Email address
-						</label>
 						<div className="mt-1">
-							<input
-								type="email"
+							<InputText
+								label="Email Address"
 								name="email"
 								autoComplete="email"
-								required
+								required={true}
+								error={false}
+								erroeMsg="Display name must be at least 3 characters long."
 								value={userInput.email}
-								onChange={(e) =>
-									handleUserInput(
-										e.target.name,
-										e.target.value
-									)
+								onChange={(name, value) =>
+									handleUserInput(name, value)
 								}
-								className={styles.inputStyle}
 							/>
 						</div>
 					</div>
