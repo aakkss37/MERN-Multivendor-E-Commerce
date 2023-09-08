@@ -30,7 +30,9 @@ const Login: React.FC = () => {
 					<div className="absolute top-14 left-14">
 						<h2 className="text-center text-sm text-secondary-dark">
 							Don't you have an account?{" "}
-							<Link to="/sign-up" className="text-primary underline cursor-pointer hover:text-primary-dark transition duration-300">
+							<Link
+								to="/sign-up"
+								className="text-primary underline cursor-pointer hover:text-primary-dark transition duration-300">
 								Create Account
 							</Link>
 						</h2>
@@ -131,10 +133,10 @@ const Login: React.FC = () => {
 							Terms and condition, Lorem ipsum is a placeholder
 							text commonly used to demonstrate the visual form of
 							a document or a typeface without relying on
-							meaningful content{" "}
+							meaningful content
 							<Link
 								to="https://legal.hubspot.com/privacy-policy"
-								className="text-secondary-light underline cursor-pointer hover:text-primary transition duration-300">
+								className="text-secondary-light mx-1 underline cursor-pointer hover:text-primary transition duration-300">
 								View more
 							</Link>
 						</p>
