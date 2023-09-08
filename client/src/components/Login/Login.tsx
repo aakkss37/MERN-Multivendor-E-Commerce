@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ShopIN from "../../assets/ShopIN";
 import styles from "../../styles/styles";
+import google from "../../assets/search.png"
+import facebook from "../../assets/facebook.png"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -27,7 +29,7 @@ const Login: React.FC = () => {
 					<div className="flex justify-center items-center">
 						<ShopIN width="175" height="62" />
 					</div>
-					<div className="absolute top-14 left-14">
+					<div className="absolute top-14 w-full">
 						<h2 className="text-center text-sm text-secondary-dark">
 							Don't you have an account?{" "}
 							<Link
@@ -126,6 +128,22 @@ const Login: React.FC = () => {
 							className="w-full py-1 text-white border-0 bg-primary hover:bg-primary-dark transition duration-300 cursor-pointer rounded-md shadow-sm outline-none ring-0 "
 							onClick={handleLogin}>
 							Login
+						</button>
+					</div>
+					<div className={`${styles.noramlFlex} justify-between`}>
+						<div className="w-5/12 h-[1px] bg-neutral-200"></div>
+						<div className="text-xs text-secondary-light">
+							<p>OR</p>
+						</div>
+						<div className="w-5/12 h-[1px] bg-neutral-200"></div>
+					</div>
+					<div
+						className={`${styles.noramlFlex} justify-center gap-6`}>
+						<button>
+							<img src={google} alt="google" width={25} />
+						</button>
+						<button>
+							<img src={facebook} alt="facebook" width={25} />
 						</button>
 					</div>
 					<div>

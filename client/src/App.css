@@ -8,35 +8,40 @@ body {
 
 }
 
-input, select {
+input,
+select {
 	outline: none;
 }
 
-::-webkit-scrollbar-track {
-	background: #81818142;
-	border-radius: 4px;
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
 }
 
-::-webkit-scrollbar-thumb {
-	background: #3ab2bb;
-	border-radius: 4px;
+/* Track */
+::-webkit-scrollbar-track {
+	background: #213343;
 }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: #ff5c35;
+}
+
 
 /* For Firefox */
 ::-moz-scrollbar {
-	width: 3px;
-	height: 5px;
-	border-radius: 4px;
+	width: 5px;
 }
 
 ::-moz-scrollbar-track {
-	background: #163141;
-	border-radius: 4px;
+	background: #213343;
 }
 
 ::-moz-scrollbar-thumb {
-	background: #3ab2bb;
-	border-radius: 4px;
+	border-radius: 10px;
+	background: #ff5c35;
 }
 
 /* div {
