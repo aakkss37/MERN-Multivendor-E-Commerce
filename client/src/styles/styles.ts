@@ -12,9 +12,11 @@ const styles = {
     cart_button_text:"text-[#fff] text-[16px] font-[600]",
     input:"w-full border p-1 rounded-[5px]",
     activeStatus:"w-[10px] h-[10px] rounded-full absolute top-0 right-1 bg-[#40d132]",
+
+	// SELF MADE
     noramlFlex:"flex items-center",
-	inputStyle: "appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-primary sm:text-sm",
-	inputError: "appearance-none block w-full px-3 py-2 border border-red-500 bg-[#ff000022] rounded-md shadow-sm placeholder-gray-400 sm:text-sm",
+	inputStyle: "appearance-none block w-full px-2 py-[6px] border border-neutral-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-primary sm:text-sm",
+	inputError: "appearance-none block w-full px-2 py-[6px] border border-red-500 bg-[#ff000022] rounded-md shadow-sm placeholder-gray-400 sm:text-sm",
   };
   
   export default styles;
