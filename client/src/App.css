@@ -12,7 +12,7 @@ input,
 select,
 button {
 	outline: none;
-	appearance: none;
+	/* appearance: none; */
 }
 
 /* width */

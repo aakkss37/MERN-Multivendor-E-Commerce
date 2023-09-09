@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import ShopIN from "../../assets/ShopIN";
 import styles from "../../styles/styles";
-import google from "../../assets/search.png"
-import facebook from "../../assets/facebook.png"
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import google from "../../assets/search.png";
+import facebook from "../../assets/facebook.png";
 import { Link } from "react-router-dom";
+import InputText from "../../UI/Inputs/InputText";
+import { UserInputErrorMsgType, UserInputErrorType } from "./Types";
+import InputPassword from "../../UI/Inputs/InputPassword";
+import ButtonSubmit from "../../UI/Buttons/ButtonSubmit";
 
 interface UserInputType {
 	email: string;
@@ -12,15 +15,55 @@ interface UserInputType {
 }
 
 const Login: React.FC = () => {
-	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [userInput, setUserInput] = useState<UserInputType>({
 		email: "",
 		password: "",
 	});
+	const [inputError, setInputError] = useState<UserInputErrorType>({
+		email: false,
+		password: false,
+	});
+	const [inputErrorMsg, setInputErrorMsg] = useState<UserInputErrorMsgType>({
+		email: "",
+		password: "",
+	});
 	const handleUserInput = (name: string, value: string) => {
+		setInputError((prev) => ({
+			...prev,
+			[name]: false,
+		}));
+		setInputErrorMsg((prev) => ({
+			...prev,
+			[name]: false,
+		}));
 		setUserInput((props) => ({ ...props, [name]: value }));
 	};
-	const handleLogin = () => {};
+
+	const validateForm = () => {
+		const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+		if (!emailPattern.test(userInput.email)) {
+			setInputErrorMsg((prev) => ({
+				...prev,
+				email: "Please enter a valid email address.",
+			}));
+			setInputError((prev) => ({
+				...prev,
+				email: true,
+			}));
+			return false;
+		}
+		// All validation checks passed
+		return true;
+	};
+
+	const handleLogin = () => {
+		const isValid = validateForm();
+		if (isValid) {
+			// Perform registration logic here
+			// This function will only be called if the form is valid
+			console.log(userInput);
+		}
+	};
 	return (
 		<div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 px-4 ">
 			<div className="mx-auto w-full max-w-sm">
@@ -42,73 +85,45 @@ const Login: React.FC = () => {
 				</div>
 				{/* LOGIN FORM */}
 				<form className="my-10 flex flex-col sm:gap-6 gap-2">
+					{/* EMAIL INPUT */}
 					<div>
-						<label
-							htmlFor="email"
-							className="block text-sm font-medium text-neutral-500 pl-[2px]">
-							Email address
-						</label>
-						<div className="mt-1">
-							<input
-								type="email"
-								name="email"
-								autoComplete="email"
-								required
-								value={userInput.email}
-								onChange={(e) =>
-									handleUserInput(
-										e.target.name,
-										e.target.value
-									)
-								}
-								className={styles.inputStyle}
-							/>
-						</div>
+						<InputText
+							label="Email Address"
+							name="email"
+							autoComplete="email"
+							required={true}
+							error={inputError.email}
+							errorMsg={inputErrorMsg.email}
+							value={userInput.email}
+							onChange={(name, value) =>
+								handleUserInput(name, value)
+							}
+						/>
 					</div>
 					<div>
-						<label
-							htmlFor="password"
-							className="block text-sm font-medium text-neutral-500 pl-[2px]">
-							Password
-						</label>
-						<div className="mt-1 relative">
-							<input
-								type={showPassword ? "text" : "password"}
+						{/* PASSWORD INPUT */}
+						<div>
+							<InputPassword
 								name="password"
+								label="Password"
 								autoComplete="current-password"
-								required
+								required={true}
+								error={inputError.password}
+								errorMsg={inputErrorMsg.password}
 								value={userInput.password}
-								onChange={(e) =>
-									handleUserInput(
-										e.target.name,
-										e.target.value
-									)
+								onChange={(name, value) =>
+									handleUserInput(name, value)
 								}
-								className={styles.inputStyle}
 							/>
-							{showPassword ? (
-								<AiOutlineEyeInvisible
-									className="absolute right-2 top-[10px] text-primary"
-									onClick={() => setShowPassword(false)}
-								/>
-							) : (
-								<AiOutlineEye
-									className="absolute right-2 top-[10px] text-primary"
-									onClick={() => setShowPassword(true)}
-								/>
-							)}
 						</div>
 						<div className="flex justify-between items-center my-2">
-							<div
-								className={
-									styles.noramlFlex +
-									"border border-red-500 gap-1"
-								}>
+							<div className={`${styles.noramlFlex} gap-1`}>
 								<input
 									type="checkbox"
 									name="remember-me"
 									id="remember-me"
-									className="text-primary focus:ring-primary border border-primary"
+									className="text-primary w-3 h-3 focus:ring-primary border border-primary"
+									// checked
 								/>
 								<label
 									htmlFor="remembar-me"
@@ -123,12 +138,13 @@ const Login: React.FC = () => {
 							</Link>
 						</div>
 					</div>
+					{/* SUBMIT BUTTON */}
 					<div>
-						<button
-							className="w-full py-1 text-white border-0 bg-primary hover:bg-primary-dark transition duration-300 cursor-pointer rounded-md shadow-sm outline-none ring-0 "
-							onClick={handleLogin}>
-							Login
-						</button>
+						<ButtonSubmit
+							onClick={handleLogin}
+							text="Create Account"
+							type="solid"
+						/>
 					</div>
 					<div className={`${styles.noramlFlex} justify-between`}>
 						<div className="w-5/12 h-[1px] bg-neutral-200"></div>
