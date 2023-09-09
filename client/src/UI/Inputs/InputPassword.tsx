@@ -80,12 +80,12 @@ const InputPassword: React.FC<PropType> = (props) => {
 				/>
 				{showPassword ? (
 					<AiOutlineEyeInvisible
-						className="absolute right-2 top-[10px] text-primary"
+						className="absolute right-2 top-2 text-primary text-xl"
 						onClick={() => setShowPassword(false)}
 					/>
 				) : (
 					<AiOutlineEye
-						className="absolute right-2 top-[10px] text-primary"
+						className="absolute right-2 top-2 text-primary text-xl"
 						onClick={() => setShowPassword(true)}
 					/>
 				)}
