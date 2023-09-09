@@ -9,8 +9,10 @@ body {
 }
 
 input,
-select {
+select,
+button {
 	outline: none;
+	appearance: none;
 }
 
 /* width */

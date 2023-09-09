@@ -65,6 +65,7 @@ const InputText: React.FC<PropType> = (props) => {
 			<div className="mt-1">
 				<input
 					type="text"
+					id={props.name}
 					placeholder={props.placeholder ?? ""}
 					name={props.name}
 					autoComplete={props.autoComplete ?? "none"}

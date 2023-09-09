@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import TermsAndCondition from "../../static/TermsAndCondition";
 import InputText from "../../UI/Inputs/InputText";
 import InputPassword from "../../UI/Inputs/InputPassword";
+import ButtonUpload from "../../UI/Buttons/ButtonUpload";
 
 interface UserInputType {
 	displayName: string;
@@ -183,32 +184,18 @@ const Signup: React.FC = () => {
 
 					{/* SELECT PROFILE PIC BUTTON */}
 					<div>
-						{/* <label
-							htmlFor="avatar"
-							className="block text-sm font-medium text-gray-700"></label> */}
-						<div>
-							<label
-								htmlFor="file-input"
-								className="flex items-center justify-center my-2 px-4 py-[6px] border border-primary-dark rounded-md text-sm text-secondary-light hover:bg-white">
-								<span>Choose Profile Picture</span>
-								<input
-									type="file"
-									name="avatar"
-									id="file-input"
-									accept=".jpg,.jpeg,.png"
-									onChange={(e) => {
-										const selectedFile =
-											e.target.files?.[0];
-										selectedFile &&
-											setUserInput((prev) => ({
-												...prev,
-												avatar: selectedFile,
-											}));
-									}}
-									className="sr-only"
-								/>
-							</label>
-						</div>
+						<ButtonUpload
+							label="Choose Profile Picture"
+							name="avatar"
+							id="file-input"
+							accept=".jpg,.jpeg,.png"
+							onChange={(file) => {
+								setUserInput((prev) => ({
+									...prev,
+									avatar: file,
+								}));
+							}}
+						/>
 					</div>
 
 					{/* SUBMIT BUTTON */}
