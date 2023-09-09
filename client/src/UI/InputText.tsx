@@ -7,7 +7,7 @@ interface PropType {
 	placeholder?: string;
 	required?: boolean;
 	error?: boolean;
-	erroeMsg?: string;
+	errorMsg?: string;
 	value: string;
 	onChange: (name: string, value: string) => void;
 	label: string;
@@ -59,12 +59,13 @@ const InputText: React.FC<PropType> = (props) => {
 		<div>
 			<label
 				htmlFor={props.name}
-				className={`block text-sm font-medium text-neutral-500 pl-[2px] ${props.lableClassName}`}>
+				className={`block text-sm font-medium text-secondary-light pl-[2px] ${props.lableClassName}`}>
 				{props.label}
 			</label>
 			<div className="mt-1">
 				<input
 					type="text"
+					placeholder={props.placeholder ?? ""}
 					name={props.name}
 					autoComplete={props.autoComplete ?? "none"}
 					required={props.required ?? false}
@@ -78,7 +79,7 @@ const InputText: React.FC<PropType> = (props) => {
 				/>
 				{props.error && (
 					<p className="text-xs text-red-500 pl-[2px]">
-						{props.erroeMsg}
+						{props.errorMsg}
 					</p>
 				)}
 			</div>

@@ -3,11 +3,11 @@ import ShopIN from "../../assets/ShopIN";
 import styles from "../../styles/styles";
 import google from "../../assets/search.png";
 import facebook from "../../assets/facebook.png";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import TermsAndCondition from "../../static/TermsAndCondition";
 import InputText from "../../UI/InputText";
+import InputPassword from "../../UI/InputPassword";
 
 interface UserInputType {
 	displayName: string;
@@ -16,16 +16,8 @@ interface UserInputType {
 	conformPassword: string;
 	avatar: File | null;
 }
-interface ToggleType {
-	pwd: boolean;
-	cnfrmPwd: boolean;
-}
 
 const Signup: React.FC = () => {
-	const [showPassword, setShowPassword] = useState<ToggleType>({
-		pwd: false,
-		cnfrmPwd: false,
-	});
 	const [userInput, setUserInput] = useState<UserInputType>({
 		displayName: "",
 		email: "",
@@ -134,7 +126,7 @@ const Signup: React.FC = () => {
 							autoComplete="none"
 							required={true}
 							error={true}
-							erroeMsg="Display name must be at least 3 characters long."
+							errorMsg="Display name must be at least 3 characters long."
 							value={userInput.displayName}
 							onChange={(name, value) =>
 								handleUserInput(name, value)
@@ -144,113 +136,49 @@ const Signup: React.FC = () => {
 
 					{/* EMAIL INPUT */}
 					<div>
-						<div className="mt-1">
-							<InputText
-								label="Email Address"
-								name="email"
-								autoComplete="email"
-								required={true}
-								error={false}
-								erroeMsg="Display name must be at least 3 characters long."
-								value={userInput.email}
-								onChange={(name, value) =>
-									handleUserInput(name, value)
-								}
-							/>
-						</div>
+						<InputText
+							label="Email Address"
+							name="email"
+							autoComplete="email"
+							required={true}
+							error={false}
+							errorMsg="Display name must be at least 3 characters long."
+							value={userInput.email}
+							onChange={(name, value) =>
+								handleUserInput(name, value)
+							}
+						/>
 					</div>
 
 					{/* PASSWORD INPUT */}
 					<div>
-						<label
-							htmlFor="password"
-							className="block text-sm font-medium text-neutral-500 pl-[2px]">
-							Password
-						</label>
-						<div className="mt-1 relative">
-							<input
-								type={showPassword ? "text" : "password"}
-								name="password"
-								autoComplete="current-password"
-								required
-								value={userInput.password}
-								onChange={(e) =>
-									handleUserInput(
-										e.target.name,
-										e.target.value
-									)
-								}
-								className={styles.inputStyle}
-							/>
-							{showPassword.pwd ? (
-								<AiOutlineEyeInvisible
-									className="absolute right-2 top-[10px] text-primary"
-									onClick={() =>
-										setShowPassword((prev) => ({
-											...prev,
-											pwd: false,
-										}))
-									}
-								/>
-							) : (
-								<AiOutlineEye
-									className="absolute right-2 top-[10px] text-primary"
-									onClick={() =>
-										setShowPassword((prev) => ({
-											...prev,
-											pwd: true,
-										}))
-									}
-								/>
-							)}
-						</div>
+						<InputPassword
+							name="password"
+							label="Password"
+							autoComplete="current-password"
+							required={true}
+							error={false}
+							errorMsg="Password noed not match"
+							value={userInput.password}
+							onChange={(name, value) =>
+								handleUserInput(name, value)
+							}
+						/>
 					</div>
-
 					{/* COMFORM PASSWORD INPUT */}
 					<div>
-						<label
-							htmlFor="password"
-							className="block text-sm font-medium text-neutral-500 pl-[2px]">
-							Conform Password
-						</label>
-						<div className="mt-1 relative">
-							<input
-								type={showPassword ? "text" : "password"}
-								name="conformPassword"
-								autoComplete="current-password"
-								required
-								value={userInput.conformPassword}
-								onChange={(e) =>
-									handleUserInput(
-										e.target.name,
-										e.target.value
-									)
-								}
-								className={styles.inputStyle}
-								onPaste={(e) => e.preventDefault()}
-							/>
-							{showPassword.cnfrmPwd ? (
-								<AiOutlineEyeInvisible
-									className="absolute right-2 top-[10px] text-primary"
-									onClick={() =>
-										setShowPassword((prev) => ({
-											...prev,
-											cnfrmPwd: false,
-										}))
-									}
-								/>
-							) : (
-								<AiOutlineEye
-									className="absolute right-2 top-[10px] text-primary"
-									onClick={() =>
-										setShowPassword((prev) => ({
-											...prev,
-											cnfrmPwd: true,
-										}))
-									}
-								/>
-							)}
-						</div>
+						<InputPassword
+							name="conformPassword"
+							label="Conform Password"
+							autoComplete="current-password"
+							required={true}
+							error={true}
+							errorMsg="Password noed not match"
+							value={userInput.conformPassword}
+							onChange={(name, value) =>
+								handleUserInput(name, value)
+							}
+						/>
 					</div>
 
 					{/* SELECT PROFILE PIC BUTTON */}
