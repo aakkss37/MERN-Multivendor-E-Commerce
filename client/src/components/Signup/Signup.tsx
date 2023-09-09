@@ -9,6 +9,7 @@ import TermsAndCondition from "../../static/TermsAndCondition";
 import InputText from "../../UI/Inputs/InputText";
 import InputPassword from "../../UI/Inputs/InputPassword";
 import ButtonUpload from "../../UI/Buttons/ButtonUpload";
+import ButtonSubmit from "../../UI/Buttons/ButtonSubmit";
 
 interface UserInputType {
 	displayName: string;
@@ -200,11 +201,11 @@ const Signup: React.FC = () => {
 
 					{/* SUBMIT BUTTON */}
 					<div>
-						<button
-							className="w-full py-1 text-white border-0 bg-primary hover:bg-primary-dark transition duration-300 cursor-pointer rounded-md shadow-sm outline-none ring-0 "
-							onClick={handleCreateAccount}>
-							Creat Account
-						</button>
+						<ButtonSubmit
+							onClick={handleCreateAccount}
+							text="Create Account"
+							type="solid"
+						/>
 					</div>
 					<div className={`${styles.noramlFlex} justify-between`}>
 						<div className="w-5/12 h-[1px] bg-neutral-200"></div>

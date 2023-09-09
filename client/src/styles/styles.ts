@@ -17,6 +17,8 @@ const styles = {
     noramlFlex:"flex items-center",
 	inputStyle: "appearance-none block w-full px-2 py-[6px] border border-neutral-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-primary sm:text-sm",
 	inputError: "appearance-none block w-full px-2 py-[6px] border border-red-500 bg-[#ff000022] rounded-md shadow-sm placeholder-gray-400 sm:text-sm",
+	buttonSolid: "w-full py-1 text-white border-0 bg-primary hover:bg-primary-dark transition duration-300 cursor-pointer rounded-md shadow-sm outline-none ring-0",
+	buttonTransparent: "w-full py-1 text-secondary border border-primary bg-primary-light hover:bg-primary hover:text-white transition duration-300 cursor-pointer rounded-md shadow-sm outline-none ring-0"
   };
   
   export default styles;

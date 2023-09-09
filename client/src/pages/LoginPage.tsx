@@ -3,7 +3,7 @@ import Login from "../components/Login/Login";
 
 const LoginPage: React.FC = () => {
 	return (
-		<div>
+		<div className="text-sm">
 			<Login />
 		</div>
 	);
