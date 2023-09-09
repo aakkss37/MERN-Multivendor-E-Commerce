@@ -6,8 +6,8 @@ import facebook from "../../assets/facebook.png";
 import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import TermsAndCondition from "../../static/TermsAndCondition";
-import InputText from "../../UI/InputText";
-import InputPassword from "../../UI/InputPassword";
+import InputText from "../../UI/Inputs/InputText";
+import InputPassword from "../../UI/Inputs/InputPassword";
 
 interface UserInputType {
 	displayName: string;
