@@ -69,7 +69,6 @@ const InputPassword: React.FC<PropType> = (props) => {
 					name={props.name}
 					placeholder={props.placeholder ?? ""}
 					autoComplete={props.autoComplete ?? "current-password"}
-					required={props.required}
 					value={props.value}
 					onChange={(e) =>
 						props.onChange(e.target.name, e.target.value)

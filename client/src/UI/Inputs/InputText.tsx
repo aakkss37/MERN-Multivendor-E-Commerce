@@ -69,7 +69,6 @@ const InputText: React.FC<PropType> = (props) => {
 					placeholder={props.placeholder ?? ""}
 					name={props.name}
 					autoComplete={props.autoComplete ?? "none"}
-					required={props.required ?? false}
 					value={props.value}
 					onChange={(e) =>
 						props.onChange(e.target.name, e.target.value)

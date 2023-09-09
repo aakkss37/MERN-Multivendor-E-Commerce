@@ -10,14 +10,11 @@ import InputText from "../../UI/Inputs/InputText";
 import InputPassword from "../../UI/Inputs/InputPassword";
 import ButtonUpload from "../../UI/Buttons/ButtonUpload";
 import ButtonSubmit from "../../UI/Buttons/ButtonSubmit";
-
-interface UserInputType {
-	displayName: string;
-	email: string;
-	password: string;
-	conformPassword: string;
-	avatar: File | null;
-}
+import {
+	UserInputErrorMsgType,
+	UserInputErrorType,
+	UserInputType,
+} from "./Types";
 
 const Signup: React.FC = () => {
 	const [userInput, setUserInput] = useState<UserInputType>({
@@ -27,7 +24,28 @@ const Signup: React.FC = () => {
 		conformPassword: "",
 		avatar: null,
 	});
+	const [inputError, setInputError] = useState<UserInputErrorType>({
+		displayName: false,
+		email: false,
+		password: false,
+		conformPassword: false,
+	});
+	const [inputErrorMsg, setInputErrorMsg] = useState<UserInputErrorMsgType>({
+		displayName: "",
+		email: "",
+		password: "",
+		conformPassword: "",
+	});
+
 	const handleUserInput = (name: string, value: string) => {
+		setInputError((prev) => ({
+			...prev,
+			[name]: false,
+		}))
+		setInputErrorMsg((prev) => ({
+			...prev,
+			[name]: false,
+		}));
 		setUserInput((props) => ({ ...props, [name]: value }));
 	};
 
@@ -37,32 +55,61 @@ const Signup: React.FC = () => {
 		const passwordPattern =
 			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-		if (!emailPattern.test(userInput.email)) {
-			alert("Please enter a valid email address.");
-			return false;
-		}
-
-		if (userInput.password !== userInput.conformPassword) {
-			alert("Passwords do not match.");
-			return false;
-		}
-
 		if (userInput.displayName.length <= 3) {
-			alert("Display name must be at least 3 characters long.");
+			setInputErrorMsg((prev) => ({
+				...prev,
+				displayName: "Display name must be at least 3 characters long.",
+			}));
+			setInputError((prev) => ({
+				...prev,
+				displayName: true,
+			}));
 			return false;
 		}
 		if (!displayNamePattern.test(userInput.displayName)) {
-			alert("Only letters, and spaces are allowed.");
+			setInputErrorMsg((prev) => ({
+				...prev,
+				displayName: "Only letters, and spaces are allowed.",
+			}));
+			setInputError((prev) => ({
+				...prev,
+				displayName: true,
+			}));
 			return false;
 		}
-
+		if (!emailPattern.test(userInput.email)) {
+			setInputErrorMsg((prev) => ({
+				...prev,
+				email: "Please enter a valid email address.",
+			}));
+			setInputError((prev) => ({
+				...prev,
+				email: true,
+			}));
+			return false;
+		}
 		if (!passwordPattern.test(userInput.password)) {
-			alert(
-				"Password must have at least 8 characters, at least 1 special character, and at least 1 numeric value."
-			);
+			setInputErrorMsg((prev) => ({
+				...prev,
+				password: "Only letters, and spaces are allowed.",
+			}));
+			setInputError((prev) => ({
+				...prev,
+				password: true,
+			}));
 			return false;
 		}
-
+		if (userInput.password !== userInput.conformPassword) {
+			setInputErrorMsg((prev) => ({
+				...prev,
+				conformPassword: "Passwords do not match.",
+			}));
+			setInputError((prev) => ({
+				...prev,
+				conformPassword: true,
+			}));
+			return false;
+		}
 		// All validation checks passed
 		return true;
 	};
@@ -72,7 +119,7 @@ const Signup: React.FC = () => {
 		if (isValid) {
 			// Perform registration logic here
 			// This function will only be called if the form is valid
-			console.log();
+			console.log(userInput);
 		}
 	};
 	return (
@@ -127,8 +174,8 @@ const Signup: React.FC = () => {
 							name="displayName"
 							autoComplete="none"
 							required={true}
-							error={true}
-							errorMsg="Display name must be at least 3 characters long."
+							error={inputError.displayName}
+							errorMsg={inputErrorMsg.displayName}
 							value={userInput.displayName}
 							onChange={(name, value) =>
 								handleUserInput(name, value)
@@ -143,8 +190,8 @@ const Signup: React.FC = () => {
 							name="email"
 							autoComplete="email"
 							required={true}
-							error={false}
-							errorMsg="Display name must be at least 3 characters long."
+							error={inputError.email}
+							errorMsg={inputErrorMsg.email}
 							value={userInput.email}
 							onChange={(name, value) =>
 								handleUserInput(name, value)
@@ -159,8 +206,8 @@ const Signup: React.FC = () => {
 							label="Password"
 							autoComplete="current-password"
 							required={true}
-							error={false}
-							errorMsg="Password noed not match"
+							error={inputError.password}
+							errorMsg={inputErrorMsg.password}
 							value={userInput.password}
 							onChange={(name, value) =>
 								handleUserInput(name, value)
@@ -174,8 +221,8 @@ const Signup: React.FC = () => {
 							label="Conform Password"
 							autoComplete="current-password"
 							required={true}
-							error={true}
-							errorMsg="Password noed not match"
+							error={inputError.conformPassword}
+							errorMsg={inputErrorMsg.conformPassword}
 							value={userInput.conformPassword}
 							onChange={(name, value) =>
 								handleUserInput(name, value)
