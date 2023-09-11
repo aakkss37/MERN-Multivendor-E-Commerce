@@ -55,7 +55,7 @@ const Signup: React.FC = () => {
 		const passwordPattern =
 			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-		if (userInput.displayName.length <= 3) {
+		if (userInput.displayName.length < 3) {
 			setInputErrorMsg((prev) => ({
 				...prev,
 				displayName: "Display name must be at least 3 characters long.",
