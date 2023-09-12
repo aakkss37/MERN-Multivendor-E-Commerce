@@ -2,14 +2,12 @@ import express from "express";
 import dotenv from 'dotenv';
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import fileUpload from "express-fileupload";
 
 const app = express()
 dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
-app.use(fileUpload(({useTempFiles: true})))
 
 import ErrorHandler from "./utils/ErrorHandler.js";
 
