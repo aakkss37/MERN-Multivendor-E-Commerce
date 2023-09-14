@@ -17,9 +17,9 @@ import corsOption, { whiteList } from "./config/cors.js";
 app.use(cors(corsOption));
 // Enable CORS for a specific origin
 app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', whiteList);
-	res.header('Access-Control-Allow-Credentials', true);
-	next();
+    res.header('Access-Control-Allow-Origin', whiteList);
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
 });
 
 // ERROR HANDLING
