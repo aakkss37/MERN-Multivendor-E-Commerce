@@ -22,6 +22,10 @@ app.use((req, res, next) => {
     next();
 });
 
+// ROUTING
+import router from "./routes/auth/route.js";
+app.use("/", router)
+
 // ERROR HANDLING
 app.use(ErrorHandler);
 

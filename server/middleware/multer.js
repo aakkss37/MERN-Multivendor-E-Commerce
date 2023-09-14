@@ -4,7 +4,7 @@ import multer from "multer";
  * Configuration for handling file uploads using Multer.
  * @type {multer.diskStorage}
  */
-export const storage = multer.diskStorage({
+const storage = multer.diskStorage({
     /**
      * Determines the directory where uploaded files will be stored.
      * @param {Express.Request} req - The Express request object.
@@ -13,7 +13,7 @@ export const storage = multer.diskStorage({
      */
     destination: (req, res, cb) => {
         // Specify the destination directory for storing uploaded files.
-        cb(null, "uploads/");
+        cb(null, "multerStorage/");
     },
     /**
      * Generates the filename for uploaded files.
@@ -35,3 +35,9 @@ export const storage = multer.diskStorage({
         cb(null, finalFilename);
     }
 });
+
+/**
+ * Middleware for handling file uploads using Multer with a specified storage configuration.
+ * @type {multer.Multer}
+ */
+export const upload = multer({ storage });
