@@ -15,6 +15,7 @@ import {
 	UserInputErrorType,
 	UserInputType,
 } from "./Types";
+import AXIOS_INSTANCE from "../../services/axios";
 
 const Signup: React.FC = () => {
 	const [userInput, setUserInput] = useState<UserInputType>({
@@ -41,7 +42,7 @@ const Signup: React.FC = () => {
 		setInputError((prev) => ({
 			...prev,
 			[name]: false,
-		}))
+		}));
 		setInputErrorMsg((prev) => ({
 			...prev,
 			[name]: false,
@@ -114,12 +115,35 @@ const Signup: React.FC = () => {
 		return true;
 	};
 
-	const handleCreateAccount = () => {
+	const handleCreateAccount = async () => {
 		const isValid = validateForm();
-		if (isValid) {
-			// Perform registration logic here
-			// This function will only be called if the form is valid
-			console.log(userInput);
+		if (!isValid) {
+			return;
+		}
+
+		const formData = new FormData();
+
+		// Add JSON data to formData
+		formData.append("displayName", userInput.displayName);
+		formData.append("email", userInput.email);
+		formData.append("password", userInput.password);
+		// Add file data to formData if it exists
+		if (userInput.avatar) {
+			formData.append("file", userInput.avatar);
+		}
+
+		try {
+			const res = await AXIOS_INSTANCE.post("/auth/signup", formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+
+			// Handle the response as needed
+			console.log("Response:", res.data);
+		} catch (error) {
+			// Handle errors
+			console.error("Error:", error);
 		}
 	};
 	return (

@@ -8,6 +8,7 @@ dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
+app.use("/", express.static("multerStorage"))
 
 import ErrorHandler from "./utils/ErrorHandler.js";
 
@@ -24,7 +25,7 @@ app.use((req, res, next) => {
 
 // ROUTING
 import router from "./routes/auth/route.js";
-app.use("/", router)
+app.use("/auth", router)
 
 // ERROR HANDLING
 app.use(ErrorHandler);
