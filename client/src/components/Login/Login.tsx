@@ -142,7 +142,7 @@ const Login: React.FC = () => {
 					<div>
 						<ButtonSubmit
 							onClick={handleLogin}
-							text="Create Account"
+							text="Login"
 							type="solid"
 						/>
 					</div>

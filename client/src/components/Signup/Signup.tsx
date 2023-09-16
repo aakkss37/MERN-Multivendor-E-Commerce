@@ -10,12 +10,13 @@ import InputText from "../../UI/Inputs/InputText";
 import InputPassword from "../../UI/Inputs/InputPassword";
 import ButtonUpload from "../../UI/Buttons/ButtonUpload";
 import ButtonSubmit from "../../UI/Buttons/ButtonSubmit";
+import AXIOS_INSTANCE from "../../services/axios";
 import {
 	UserInputErrorMsgType,
 	UserInputErrorType,
 	UserInputType,
 } from "./Types";
-import AXIOS_INSTANCE from "../../services/axios";
+import { toast } from "react-toastify";
 
 const Signup: React.FC = () => {
 	const [userInput, setUserInput] = useState<UserInputType>({
@@ -111,6 +112,10 @@ const Signup: React.FC = () => {
 			}));
 			return false;
 		}
+		if (!userInput.avatar) {
+			toast.error('Please choose a display picture.');
+			return false;
+		}
 		// All validation checks passed
 		return true;
 	};
@@ -167,7 +172,7 @@ const Signup: React.FC = () => {
 				</div>
 				{/* LOGIN FORM */}
 				<form className="my-10 flex flex-col sm:gap-6 gap-2">
-					{/* PROFILE PICTURE */}
+					{/* DISPLAY PICTURE */}
 					<div className="flex justify-center mt-4">
 						<div className="flex flex-col items-center">
 							<div className="inline-block h-20 w-20 rounded-full overflow-hidden ">
@@ -186,7 +191,7 @@ const Signup: React.FC = () => {
 								)}
 							</div>
 							<p className="text-sm text-secondary">
-								Profile Picture
+								Display Picture
 							</p>
 						</div>
 					</div>
@@ -254,10 +259,10 @@ const Signup: React.FC = () => {
 						/>
 					</div>
 
-					{/* SELECT PROFILE PIC BUTTON */}
+					{/* SELECT DISPLAY PIC BUTTON */}
 					<div>
 						<ButtonUpload
-							label="Choose Profile Picture"
+							label="Choose Display Picture"
 							name="avatar"
 							id="file-input"
 							accept=".jpg,.jpeg,.png"
