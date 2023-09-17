@@ -113,10 +113,10 @@ const userSchema = new mongoose.Schema({
  * @name hashPassword
  * @memberof module:User~UserSchema
  */
-userSchema.pre("save", async(next) => {
-    if (userSchema.isModified("password")) {
+userSchema.pre("save", async function(next) {
+    if (this.isModified("password")) {
         const salt = await bcrypt.genSalt(10);
-        userSchema.password = await bcrypt.hash(userSchema.password, salt);
+        this.password = await bcrypt.hash(this.password, salt);
     }
     next();
 });
@@ -129,11 +129,14 @@ userSchema.pre("save", async(next) => {
  * @memberof module:User~UserSchema
  * @returns {string} JWT token for the user.
  */
-userSchema.methods.getJwtToken = () => {
-    return jwt.sign({ id: userSchema._id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: process.env.JWT_EXPIRES,
-    });
-};
+userSchema.pre("save", async function(next) {
+    if (this.isModified("password")) {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+    }
+    next();
+});
+
 
 /**
  * A method to compare a provided password with the user's stored hashed password.
@@ -144,8 +147,8 @@ userSchema.methods.getJwtToken = () => {
  * @param {string} enteredPassword - The password to compare.
  * @returns {Promise<boolean>} A promise that resolves to true if the passwords match, or false otherwise.
  */
-userSchema.methods.comparePassword = async(enteredPassword) => {
-    return await bcrypt.compare(enteredPassword, userSchema.password);
+userSchema.methods.comparePassword = async function(enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
 };
 
 
