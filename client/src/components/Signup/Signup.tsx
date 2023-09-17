@@ -113,7 +113,7 @@ const Signup: React.FC = () => {
 			return false;
 		}
 		if (!userInput.avatar) {
-			toast.error('Please choose a display picture.');
+			toast.error("Please choose a display picture.");
 			return false;
 		}
 		// All validation checks passed
@@ -125,14 +125,10 @@ const Signup: React.FC = () => {
 		if (!isValid) {
 			return;
 		}
-
 		const formData = new FormData();
-
-		// Add JSON data to formData
 		formData.append("displayName", userInput.displayName);
 		formData.append("email", userInput.email);
 		formData.append("password", userInput.password);
-		// Add file data to formData if it exists
 		if (userInput.avatar) {
 			formData.append("file", userInput.avatar);
 		}
@@ -143,12 +139,9 @@ const Signup: React.FC = () => {
 					"Content-Type": "multipart/form-data",
 				},
 			});
-
-			// Handle the response as needed
 			console.log("Response:", res.data);
-		} catch (error) {
-			// Handle errors
-			console.error("Error:", error);
+		} catch (error: Error | any) {
+			toast.error(error.response.data.msg);
 		}
 	};
 	return (

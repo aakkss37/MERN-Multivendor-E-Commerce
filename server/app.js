@@ -23,13 +23,12 @@ app.use((req, res, next) => {
     next();
 });
 
-
 // ROUTING
 import router from "./routes/auth/route.js";
 app.use("/auth", router)
 
 // ERROR HANDLING
-app.use(ErrorHandler);
+// app.use(ErrorHandler);
 
 
 export default app;

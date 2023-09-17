@@ -1,6 +1,6 @@
 import path from "path";
 import User from "../../model/userSchema.js";
-import ErrorHandler from "../../utils/ErrorHandler.js";
+// import ErrorHandler from "../../utils/ErrorHandler.js";
 import { v4 as uuidv4 } from "uuid";
 
 const passwordPattern =
