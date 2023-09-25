@@ -51,7 +51,9 @@ const signup = async(req, res, next) => {
                 await sentMail({
                     email: email,
                     subject: "Activate your account.",
-                    text: `Hello ${displayName}, \n Click the link to activate your account. \n${activationURL}`,
+                    templatePath: "../server/views/ActivationMail/activateAccount.ejs", // Use templatePath instead of emailTemplate
+                    displayName,
+                    activationURL,
                 })
                 res.status(200).json({success: true, msg: "Activation email sent."})                
             } catch (error) {

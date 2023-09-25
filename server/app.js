@@ -9,8 +9,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
 app.use("/", express.static("multerStorage"));
-
-import ErrorHandler from "./utils/ErrorHandler.js";
+app.set('view engine', 'ejs');
 
 // CORS HANDLING
 import cors from "cors";

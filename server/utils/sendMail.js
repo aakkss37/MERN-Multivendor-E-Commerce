@@ -1,4 +1,7 @@
 import nodemailer from "nodemailer";
+import ejs from "ejs";
+import fs from "fs/promises"; // Need to use a file system module like 'fs/promises' or 'fs.promises' based on your Node.js version
+
 
 
 /**
@@ -27,6 +30,13 @@ const sentMail = async (options) => {
         //     }
         // });
 
+        // Read the EJS template file
+        const templateContent = await fs.readFile(options.templatePath, "utf-8");
+        // Render the EJS template with the provided data
+        const renderedHtml = ejs.render(templateContent, {
+            activationURL: options.activationURL,
+            displayName: options.displayName,
+        });
 
         // !SEND EMAIL FORM GMAIL ACCOUNT
         const transporter = nodemailer.createTransport({
@@ -44,7 +54,7 @@ const sentMail = async (options) => {
             from: process.env.SMTP_MAIL,
             to: options.email,
             subject: options.subject,
-            text: options.text,
+            html: renderedHtml, // Use 'html' instead of 'text' to send HTML content
         };
     
         const info = await transporter.sendMail(mailOptions);
