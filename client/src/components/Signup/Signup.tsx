@@ -9,7 +9,7 @@ import TermsAndCondition from "../../static/TermsAndCondition";
 import InputText from "../../UI/Inputs/InputText";
 import InputPassword from "../../UI/Inputs/InputPassword";
 import ButtonUpload from "../../UI/Buttons/ButtonUpload";
-import ButtonSubmit from "../../UI/Buttons/ButtonSubmit";
+import ButtonGeneral from "../../UI/Buttons/ButtonGeneral";
 import AXIOS_INSTANCE from "../../services/axios";
 import {
 	UserInputErrorMsgType,
@@ -17,6 +17,7 @@ import {
 	UserInputType,
 } from "./Types";
 import { toast } from "react-toastify";
+import Modal from "../../UI/Modal/Modal";
 
 const Signup: React.FC = () => {
 	const [userInput, setUserInput] = useState<UserInputType>({
@@ -39,6 +40,7 @@ const Signup: React.FC = () => {
 		conformPassword: "",
 	});
 	const [isRegisterLoading, setIsRegisterLoading] = useState<boolean>(false);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
 	const handleUserInput = (name: string, value: string) => {
 		setInputError((prev) => ({
@@ -138,6 +140,7 @@ const Signup: React.FC = () => {
 			console.log("Response:", res.data);
 			if(res.status === 201) toast.success("Account Created successfully.");
 			setIsRegisterLoading(false);
+			setIsModalOpen(true)
 		} catch (error: Error | any) {
 			setIsRegisterLoading(false);
 			if (error.response.status === 409) {
@@ -167,6 +170,18 @@ const Signup: React.FC = () => {
 	return (
 		<div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 px-4 ">
 			<div className="mx-auto w-full max-w-sm">
+				{/* MODAL */}
+				<Modal
+					isOpen={isModalOpen}
+					onClose={() => setIsModalOpen(false)}
+				>
+					<h1>Email Sent</h1>
+					<p>
+					We have sent you an account activation email with the activation token link. 
+					please check your email
+					</p>
+					<button onClick={() => setIsModalOpen(false)}>Okay</button>
+				</Modal>
 				{/* LOGIN HEAD */}
 				<div className="relative">
 					<div className="flex justify-center items-center">
@@ -291,7 +306,7 @@ const Signup: React.FC = () => {
 
 					{/* SUBMIT BUTTON */}
 					<div>
-						<ButtonSubmit
+						<ButtonGeneral
 							onClick={handleCreateAccount}
 							text="Create Account"
 							type="solid"

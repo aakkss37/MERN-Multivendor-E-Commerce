@@ -8,7 +8,7 @@ interface PropType {
 	isLoading?: boolean;
 }
 
-const ButtonSubmit: React.FC<PropType> = (props) => {
+const ButtonGeneral: React.FC<PropType> = (props) => {
 	return (
 		<>
 		{props.isLoading ?
@@ -40,4 +40,4 @@ const ButtonSubmit: React.FC<PropType> = (props) => {
 	);
 };
 
-export default ButtonSubmit;
+export default ButtonGeneral;

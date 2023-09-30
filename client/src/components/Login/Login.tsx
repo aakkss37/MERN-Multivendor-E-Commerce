@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import InputText from "../../UI/Inputs/InputText";
 import { UserInputErrorMsgType, UserInputErrorType } from "./Types";
 import InputPassword from "../../UI/Inputs/InputPassword";
-import ButtonSubmit from "../../UI/Buttons/ButtonSubmit";
+import ButtonGeneral from "../../UI/Buttons/ButtonGeneral";
 
 interface UserInputType {
 	email: string;
@@ -140,7 +140,7 @@ const Login: React.FC = () => {
 					</div>
 					{/* SUBMIT BUTTON */}
 					<div>
-						<ButtonSubmit
+						<ButtonGeneral
 							onClick={handleLogin}
 							text="Login"
 							type="solid"
