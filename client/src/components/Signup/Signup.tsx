@@ -132,7 +132,7 @@ const Signup: React.FC = () => {
 		}
 
 		try {
-			const res = await AXIOS_INSTANCE.post("/auth/signup", formData, {
+			const res = await AXIOS_INSTANCE.post("/api/auth/signup", formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
 				},

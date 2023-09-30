@@ -15,15 +15,18 @@ const signup = async(req, res, next) => {
     try {
         const foundEmail = await User.findOne({ email });
         if (foundEmail) {
-            // return next(new ErrorHandler("User already exist", 409));
-            res.status(409).json({ msg: "User already exist." });
-
             // DELETING THE DISPLAY PIC FROM THE STORAGE IF EMAIL ALREADY EXIST
             // BECAUSE DISPLAY PIC WILL GET STORED BEFORE ANY VALIDATION AS 
             // MULTER MIDDLEWARE WILL RUN FIRST AND THEN THIS CONTROLLER WILL RUN.
-            const filename = req.file.filename;
-            const filePath = `multerStorage/${filename}`
-            fs.unlink(filePath, (err) => {console.log(err)})
+            if(req?.file){
+                const filename = req.file.filename;
+                const filePath = `multerStorage/${filename}`
+                fs.unlink(filePath, (err) => {console.log(err)})
+            }
+
+            // return next(new ErrorHandler("User already exist", 409));
+            res.status(409).json({ msg: "User already exist." });
+
         } else if (!passwordPattern.test(password)) {
             res.status(400).json({
                 msg: "Password must contain minimum 8 letter password, with at least a symbol, upper and lower case letters and a number",
@@ -46,7 +49,7 @@ const signup = async(req, res, next) => {
             };
 
             const activationToken = createActivationToken(newAccountData)
-            const activationURL = `http://localhost:8000/api/activation/${activationToken}`
+            const activationURL = `http://localhost:5173/api/auth/activate-account/?token=${activationToken}`
             try {
                 await sentMail({
                     email: email,
