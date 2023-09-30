@@ -175,12 +175,19 @@ const Signup: React.FC = () => {
 					isOpen={isModalOpen}
 					onClose={() => setIsModalOpen(false)}
 				>
-					<h1>Email Sent</h1>
-					<p>
-					We have sent you an account activation email with the activation token link. 
-					please check your email
-					</p>
-					<button onClick={() => setIsModalOpen(false)}>Okay</button>
+					<div className="text-sm">
+						<h1 className="text-center font-semibold text-lg mb-4">Email Sent</h1>
+						<p className="mt-2 text-justify mb-4">
+							Thankyou for Registering with us. We have sent you an account activation email with the activation token link. 
+							Please check your email.
+						</p>
+						{/* <p className="text-center mb-4"> </p> */}
+						<div>
+							<div className="w-20 mx-auto">
+								<ButtonGeneral onClick={() => setIsModalOpen(false)} text={"Okay"} type={"solid"} />
+							</div>
+						</div>
+					</div>
 				</Modal>
 				{/* LOGIN HEAD */}
 				<div className="relative">
