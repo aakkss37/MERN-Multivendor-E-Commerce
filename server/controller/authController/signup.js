@@ -49,7 +49,7 @@ const signup = async(req, res, next) => {
             };
 
             const activationToken = createActivationToken(newAccountData)
-            const activationURL = `http://localhost:5173/api/auth/activate-account/?token=${activationToken}`
+            const activationURL = `http://localhost:5173/activate-account/?token=${activationToken}`
             try {
                 await sentMail({
                     email: email,

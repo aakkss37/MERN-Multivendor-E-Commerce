@@ -7,18 +7,21 @@ const activateAccount = async (req, res, next) => {
         const { token } = req.query;
         const newUser = jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION_SECRET_KEY);
         if(newUser) {
-            const {name, email, password, avatar} = newUser;
-    
-            const activatedUser = await User.create({name, email, password, avatar});
-            activatedUser.save();
-            
-            sentToken(newUser, 201, res, "Account activated successfully");
+            const foundEmail = await User.findOne({ email });
+            if (foundEmail) {
+                res.status(498).json({msg: "Invalid | Expired Token"});
+            } else {
+                const {name, email, password, avatar} = newUser;
+                const activatedUser = await User.create({name, email, password, avatar});
+                activatedUser.save();
+                sentToken(newUser, 201, res, "Account activated successfully");
+            }
         }
 
 
     } catch (error) {
         console.log(error.message)
-        res.status(498).json({msg: "Invalid Token"});
+        res.status(498).json({msg: "Invalid | Expired Token"});
     }
 }
 export default activateAccount;
