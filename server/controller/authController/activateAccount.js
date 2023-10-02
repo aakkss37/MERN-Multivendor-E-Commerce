@@ -6,11 +6,14 @@ const activateAccount = async (req, res, next) => {
     try {
         const { token } = req.query;
         const newUser = jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION_SECRET_KEY);
+        console.log("Verified token  ===>>> ", newUser)
         if(newUser) {
-            const foundEmail = await User.findOne({ email });
+            const foundEmail = await User.findOne({email: newUser.email});
+            console.log("User Already Exist ===>>> ", newUser)
             if (foundEmail) {
-                res.status(498).json({msg: "Invalid | Expired Token"});
+                res.status(401).json({msg: "Invalid | Expired Token"});
             } else {
+                console.log(newUser)
                 const {name, email, password, avatar} = newUser;
                 const activatedUser = await User.create({name, email, password, avatar});
                 activatedUser.save();
@@ -21,7 +24,7 @@ const activateAccount = async (req, res, next) => {
 
     } catch (error) {
         console.log(error.message)
-        res.status(498).json({msg: "Invalid | Expired Token"});
+        res.status(401).json({msg: "Invalid | Expired Token"});
     }
 }
 export default activateAccount;

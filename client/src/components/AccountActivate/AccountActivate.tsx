@@ -15,6 +15,7 @@ const AccountActivate: React.FC = () => {
                 const response = await AXIOS_INSTANCE.get(`/api/auth/activate-account/?token=${token}`)
                 console.log(response.data);
                 setIsTokenValid(true);
+                setScreenLoaderOn(false)
             } catch (error) {
                 setScreenLoaderOn(false)
             }
@@ -23,14 +24,20 @@ const AccountActivate: React.FC = () => {
         void validateToken()
     }, [token])
     return (
-        <div className='pageloader'>
-            <div className='preloader'>
+        <div className='w-full grid place-items-center h-screen'>
                 {
                     screenLoaderOn ? <PageLoader loadingText='Verifying Token...' /> 
-                    : !screenLoaderOn && !isTokenValid
-                    && <p>Error 498, Invalid Token</p>
+                    : !screenLoaderOn && isTokenValid
+                    ?
+                    <div className=''>
+                     <p className='text-xl font-semibold text-secondary-light'>Account Activated.</p>
+                    </div>
+                    : 
+                    <div className=''> 
+                        <p className='text-xl font-semibold text-secondary-light'>Error 498, Invalid Token</p>
+                    </div>
+                    
                 }
-            </div>
         </div>
     )
 }
