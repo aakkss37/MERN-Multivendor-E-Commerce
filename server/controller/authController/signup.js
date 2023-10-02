@@ -2,14 +2,13 @@ import path from "path";
 import User from "../../model/userSchema.js";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs"
-import { createActivationToken } from "./createActivationToken.js";
 import sentMail from "../../utils/sendMail.js";
+import { createActivationToken } from "./createActivationToken.js";
 
 
 const passwordPattern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 const signup = async(req, res, next) => {
-    console.log("connected");
     console.log(req.body);
     const { displayName, email, password } = req.body;
     try {
