@@ -1,0 +1,17 @@
+{
+	"json.schemaDownload.enable": true,
+	"editor.formatOnSave": false,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"prettier.trailingComma": "es5",
+	"prettier.requireConfig": false,
+	"prettier.singleQuote": false,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 4,
+	"prettier.printWidth": 80,
+	"editor.tabSize": 4,
+	"editor.codeActionsOnSave": [
+		"source.formatDocument",
+		"source.fixAll.eslint"
+	],
+	"files.eol": "\n"
+}

@@ -1,0 +1,33 @@
+{
+	"javascript.format.enable": false,
+	"typescript.format.enable": false,
+	"json.format.enable": false,
+	"html.format.enable": false,
+	"emmet.showAbbreviationSuggestions": false,
+	"css.validate": false,
+	"[javascript]": {
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": null
+	},
+	"editor.trimAutoWhitespace": false,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"files.trimTrailingWhitespace": false,
+	"files.trimFinalNewlines": false,
+	"eslint.format.enable": false,
+	"files.autoSave": "off",
+	"json.schemaDownload.enable": true,
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"prettier.trailingComma": "es5",
+	"prettier.requireConfig": false,
+	"prettier.singleQuote": false,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 4,
+	"prettier.printWidth": 80,
+	"editor.tabSize": 4,
+	"editor.codeActionsOnSave": [
+		"source.formatDocument",
+		"source.fixAll.eslint"
+	],
+	"files.eol": "\n"
+}

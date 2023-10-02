@@ -126,7 +126,7 @@ const Login: React.FC = () => {
 									// checked
 								/>
 								<label
-									htmlFor="remembar-me"
+									htmlFor="remember-me"
 									className="text-sm text-secondary-dark">
 									Remember me.
 								</label>
