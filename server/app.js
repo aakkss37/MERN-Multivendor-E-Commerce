@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 
 // ROUTING
 import router from "./routes/auth/route.js";
-app.use("/auth", router)
+app.use("/api/auth", router)
 
 // ERROR HANDLING
 // app.use(ErrorHandler);
