@@ -11,7 +11,7 @@ const activateAccount = async (req, res, next) => {
             const foundEmail = await User.findOne({email: newUser.email});
             console.log("User Already Exist ===>>> ", newUser)
             if (foundEmail) {
-                res.status(401).json({msg: "Invalid | Expired Token"});
+                return res.status(401).json({msg: "Invalid | Expired Token"});
             } else {
                 console.log(newUser)
                 const {name, email, password, avatar} = newUser;
@@ -24,7 +24,7 @@ const activateAccount = async (req, res, next) => {
 
     } catch (error) {
         console.log(error.message)
-        res.status(401).json({msg: "Invalid | Expired Token"});
+        return res.status(401).json({msg: "Invalid | Expired Token"});
     }
 }
 export default activateAccount;

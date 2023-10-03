@@ -8,6 +8,8 @@ import InputText from "../../UI/Inputs/InputText";
 import { UserInputErrorMsgType, UserInputErrorType } from "./Types";
 import InputPassword from "../../UI/Inputs/InputPassword";
 import ButtonGeneral from "../../UI/Buttons/ButtonGeneral";
+import AXIOS_INSTANCE from "../../services/axios";
+import { toast } from "react-toastify";
 
 interface UserInputType {
 	email: string;
@@ -27,6 +29,7 @@ const Login: React.FC = () => {
 		email: "",
 		password: "",
 	});
+	const [isLoginLoading, setLoginLoading] = useState<boolean>(false)
 	const handleUserInput = (name: string, value: string) => {
 		setInputError((prev) => ({
 			...prev,
@@ -56,12 +59,40 @@ const Login: React.FC = () => {
 		return true;
 	};
 
-	const handleLogin = () => {
+	const handleLogin = async () => {
 		const isValid = validateForm();
-		if (isValid) {
-			// Perform registration logic here
-			// This function will only be called if the form is valid
-			console.log(userInput);
+		if(isValid){
+			try {
+				setLoginLoading(false);
+				const res = await AXIOS_INSTANCE.post("/api/auth/login", {...userInput});
+				console.log("Response:", res.data);
+				if(res.status === 200) toast.success("Login successful");
+				setLoginLoading(false)
+			} catch (error: Error | any) {
+				setLoginLoading(false);
+				// if (error.response.status === 409) {
+				// 	setInputErrorMsg((prev) => ({
+				// 		...prev,
+				// 		email: error.response.data.msg,
+				// 	}));
+				// 	setInputError((prev) => ({
+				// 		...prev,
+				// 		email: true,
+				// 	}));
+				// } else if (error.response.status === 400) {
+				// 	setInputErrorMsg((prev) => ({
+				// 		...prev,
+				// 		password: error.response.data.msg,
+				// 	}));
+				// 	setInputError((prev) => ({
+				// 		...prev,
+				// 		password: true,
+				// 	}));
+				// }
+				// else {
+				// 	toast.error(error.response.data.msg)
+				// }
+			}
 		}
 	};
 	return (
@@ -144,6 +175,7 @@ const Login: React.FC = () => {
 							onClick={handleLogin}
 							text="Login"
 							type="solid"
+							isLoading={isLoginLoading}
 						/>
 					</div>
 					<div className={`${styles.normalFlex} justify-between`}>

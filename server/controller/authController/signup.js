@@ -9,7 +9,6 @@ import { createActivationToken } from "../authController/createActivationToken.j
 const passwordPattern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 const signup = async(req, res, next) => {
-    console.log(req.body);
     const { displayName, email, password } = req.body;
     try {
         const foundEmail = await User.findOne({ email });
@@ -24,10 +23,10 @@ const signup = async(req, res, next) => {
             }
 
             // return next(new ErrorHandler("User already exist", 409));
-            res.status(409).json({ msg: "User already exist." });
+            return res.status(409).json({ msg: "User already exist." });
 
         } else if (!passwordPattern.test(password)) {
-            res.status(400).json({
+            return res.status(400).json({
                 msg: "Password must contain minimum 8 letter password, with at least a symbol, upper and lower case letters and a number",
             });
         } else {
@@ -57,15 +56,15 @@ const signup = async(req, res, next) => {
                     displayName,
                     activationURL,
                 })
-                res.status(200).json({success: true, msg: "Activation email sent."})                
+                return res.status(200).json({success: true, msg: "Activation email sent."})                
             } catch (error) {
                 console.log(error)
-                res.status(500).json({msg: "Internal server error."})
+                return res.status(500).json({msg: "Internal server error."})
             }
         }
     } catch (error) {
         console.log("error ======>>>>>", error);
-        res.status(500).json({ msg: "Internal server error", error: error });
+        return res.status(500).json({ msg: "Internal server error", error: error });
     }
 };
 export default signup;
