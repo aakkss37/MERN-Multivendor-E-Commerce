@@ -3,7 +3,7 @@ import User from "../../model/userSchema.js";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs"
 import sentMail from "../../utils/sendMail.js";
-import { createActivationToken } from "./createActivationToken.js";
+import { createActivationToken } from "../authController/createActivationToken.js";
 
 
 const passwordPattern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
@@ -62,8 +62,6 @@ const signup = async(req, res, next) => {
                 console.log(error)
                 res.status(500).json({msg: "Internal server error."})
             }
-            // const newUser = await User.create(newAccountData);
-            // res.status(201).json({ success: true, newUser });
         }
     } catch (error) {
         console.log("error ======>>>>>", error);
