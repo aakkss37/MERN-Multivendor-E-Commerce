@@ -13,10 +13,11 @@ const sentToken = (user, statusCode, res, msg) => {
      * Generate a JSON Web Token (JWT) for the provided user.
      *
      * @param {object} user - The user object to encode in the JWT token.
-     * @param {string} process.env.JWT_ACCOUNT_ACTIVATION_SECRET_KEY - The JWT secret key.
+     * @param {string} process.env.JWT_SECRET_KEY - The JWT secret key.
      * @returns {string} The generated JWT token.
      */
-    const token = jwt.sign(user, process.env.JWT_ACCOUNT_ACTIVATION_SECRET_KEY);
+    console.log(user)
+    const token = jwt.sign(user, process.env.JWT_SECRET_KEY);
 
     // Set a cookie with the JWT token.
     res.cookie("access_token", token, {

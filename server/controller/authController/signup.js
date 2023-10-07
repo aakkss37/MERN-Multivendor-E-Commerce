@@ -31,7 +31,6 @@ const signup = async(req, res, next) => {
             });
         } else {
             let fileURL = ""
-            console.log()
             if (req?.file?.filename) {
                 const filename = req.file.filename;
                 fileURL = path.join(filename);

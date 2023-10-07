@@ -32,6 +32,7 @@ const corsOption = {
 			callBack(new Error("Request rejected by CORS"))
 		}
 	},
+	
 	/**
 	 * Indicates whether to include credentials (e.g., cookies, HTTP authentication) in cross-origin requests.
 	 * @type {boolean}

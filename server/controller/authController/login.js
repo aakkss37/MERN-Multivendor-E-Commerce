@@ -1,4 +1,5 @@
 import User from "../../model/userSchema.js";
+import sentToken from "../../utils/jwtToken.js";
 
 const login = async (req, res, next) => {
     const {email, password} = req.body;
@@ -12,12 +13,14 @@ const login = async (req, res, next) => {
         if(!foundUser) {
             return res.status(404).json({success: false, error: "email", msg: "User not found."});
         };
-        const idPasswordValid = await foundUser.comparePassword(password);
-        if(!idPasswordValid) {
+        const isPasswordValid = await foundUser.comparePassword(password);
+        console.log("isisPasswordValid -->>>-->> ", isPasswordValid);
+        if(!isPasswordValid) {
             return res.status(401).json({success: false, error: "password", msg: "Wrong password."});
         };
-        return res.status(200).json({success: true, msg: "Login successful", user: foundUser})
+        sentToken(JSON.parse(JSON.stringify(foundUser)), 200, res, "Login successful");
     } catch (error) {
+        console.log(error)
         return res.status(500).json({msg: "Internal server error!", error: error.message})
     }
 }

@@ -64,9 +64,16 @@ const Login: React.FC = () => {
 		if(isValid){
 			try {
 				setLoginLoading(false);
-				const res = await AXIOS_INSTANCE.post("/api/auth/login", {...userInput});
+				const res = await AXIOS_INSTANCE.post("/api/auth/login", 
+				{
+					...userInput
+				},
+				{
+					withCredentials: true
+				}
+				);
 				console.log("Response:", res.data);
-				if(res.status === 200) toast.success("Login successful");
+				if(res.status === 201) toast.success("Login successful");
 				setLoginLoading(false)
 			} catch (error: Error | any) {
 				setLoginLoading(false);
