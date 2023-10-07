@@ -3,7 +3,7 @@ import ShopIN from "../../assets/ShopIN";
 import styles from "../../styles/styles";
 import google from "../../assets/search.png";
 import facebook from "../../assets/facebook.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputText from "../../UI/Inputs/InputText";
 import { UserInputErrorMsgType, UserInputErrorType } from "./Types";
 import InputPassword from "../../UI/Inputs/InputPassword";
@@ -17,6 +17,7 @@ interface UserInputType {
 }
 
 const Login: React.FC = () => {
+	const navigate = useNavigate()
 	const [userInput, setUserInput] = useState<UserInputType>({
 		email: "",
 		password: "",
@@ -74,6 +75,7 @@ const Login: React.FC = () => {
 				);
 				console.log("Response:", res.data);
 				if(res.status === 201) toast.success("Login successful");
+				navigate("/home")
 				setLoginLoading(false)
 			} catch (error: Error | any) {
 				setLoginLoading(false);
