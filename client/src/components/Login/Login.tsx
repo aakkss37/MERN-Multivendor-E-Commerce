@@ -79,28 +79,28 @@ const Login: React.FC = () => {
 				setLoginLoading(false)
 			} catch (error: Error | any) {
 				setLoginLoading(false);
-				// if (error.response.status === 409) {
-				// 	setInputErrorMsg((prev) => ({
-				// 		...prev,
-				// 		email: error.response.data.msg,
-				// 	}));
-				// 	setInputError((prev) => ({
-				// 		...prev,
-				// 		email: true,
-				// 	}));
-				// } else if (error.response.status === 400) {
-				// 	setInputErrorMsg((prev) => ({
-				// 		...prev,
-				// 		password: error.response.data.msg,
-				// 	}));
-				// 	setInputError((prev) => ({
-				// 		...prev,
-				// 		password: true,
-				// 	}));
-				// }
-				// else {
-				// 	toast.error(error.response.data.msg)
-				// }
+				if (error.response.status === 404) {
+					setInputErrorMsg((prev) => ({
+						...prev,
+						email: error.response.data.msg,
+					}));
+					setInputError((prev) => ({
+						...prev,
+						email: true,
+					}));
+				} else if (error.response.status === 401) {
+					setInputErrorMsg((prev) => ({
+						...prev,
+						password: error.response.data.msg,
+					}));
+					setInputError((prev) => ({
+						...prev,
+						password: true,
+					}));
+				}
+				else {
+					toast.error(error.response.data.msg)
+				}
 			}
 		}
 	};
