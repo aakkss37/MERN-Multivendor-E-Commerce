@@ -4,7 +4,7 @@ import User from "../model/userSchema.js";
 export const isAuthenticated = async(req, res, next) => {
     try {   
         const {access_token} = req.cookies;
-        console.log(access_token);
+        console.log("access token --==-->>",access_token);
         if(!access_token) return (res.status(401).json({msg: "Credentials were not provided"}));
         const decoded = jwt.verify(access_token, process.env.JWT_SECRET_KEY);
         console.log("decoded---->>>", decoded._id);
