@@ -126,9 +126,43 @@ export const categoriesData = [
 ];
 
 // product Data
-export const productData = [
+export interface ImageType {
+	public_id?: string;
+	url?: string;
+}
+export interface ProductSailerType {
+	name?: string;
+	shop_avatar: ImageType,
+	ratings?: string | number;
+	category?: string;
+}
+export interface ReviewType {
+	user: {
+		name?: string;
+		id?: string;
+	};
+	comment: string;
+	rating: string | number;
+
+}
+export interface ProductDetailType {
+	id: string;
+	category?: string;
+	name: string;
+	description?: string;
+	image_Url: ImageType[];
+	shop: ProductSailerType;
+	price?: string | number,
+	discount_price?: string | number,
+	rating?: string | number,
+	total_sell?: string | number,
+	stock?: string | number,
+	reviews?: ReviewType[],
+}
+
+export const productData: ProductDetailType[] = [
 	{
-		id: 1,
+		id: "332fce92-7074-4dea-87ac-138383856fa4",
 		category: "Computers and Laptops",
 		name: "MacBook pro M2 chipset 256gb ssd 8gb ram space-gray color with apple 1 year warranty",
 		description:
@@ -158,7 +192,7 @@ export const productData = [
 		stock: 10,
 	},
 	{
-		id: 2,
+		id: "17d18d9c-36da-4dc1-baa5-34f002646b15",
 		category: "Mobile and Tablets",
 		name: "Iphone 14 pro max 256 gb ssd and 8 gb ram silver colour",
 		description:
@@ -187,7 +221,7 @@ export const productData = [
 		stock: 10,
 	},
 	{
-		id: 1,
+		id: "550a8c84-4876-4cee-b1f5-c1cbf7ef649d",
 		category: "Computers and Laptop",
 		name: "MacBook pro M2 chipset 256gb ssd 8gb ram space gray color with apple 1 year warranty",
 		description:
@@ -217,7 +251,7 @@ export const productData = [
 		stock: 10,
 	},
 	{
-		id: 4,
+		id: "78175ea9-6c32-4c78-8b3f-bf6ea486a6fa",
 		category: "Others",
 		name: "New Fashionable Watch for men 2023 with multiple colors",
 		description:
@@ -248,7 +282,7 @@ export const productData = [
 		stock: 10,
 	},
 	{
-		id: 5,
+		id: "26f48337-d4ec-4a96-b689-65b52f2fcb77",
 		category: "Shoes",
 		name: "New Trend shoes for gents with all sizes",
 		description:
@@ -278,7 +312,7 @@ export const productData = [
 		stock: 10,
 	},
 	{
-		id: 1,
+		id: "365e92fe-57ae-4ec2-b73d-1fb5a5260a05",
 		name: "Gaming Headphone Asus with mutiple color and free delivery",
 		description:
 			"Product details are a crucial part of any eCommerce website or online marketplace. These details help the potential customers to make an informed decision about the product they are interested in buying. A well-written product description can also be a powerful marketing tool that can help to increase sales.Product details typically include information about the product's features, specifications, dimensions, weight, materials, and other relevant information that can help customers to understand the product better. The product details section should also include high-quality images and videos of the product, as well as customer reviews and ratings.",
@@ -317,7 +351,7 @@ export const productData = [
 		category: "Music and Gaming",
 	},
 	{
-		id: 4,
+		id: "5cd575ff-67b9-47aa-b262-bd920d21d237",
 		name: "New Fashionable Watch for men 2023 with multiple colors",
 		description:
 			"Product details are a crucial part of any eCommerce website or online marketplace. These details help the potential customers to make an informed decision about the product they are interested in buying. A well-written product description can also be a powerful marketing tool that can help to increase sales.Product details typically include information about the product's features, specifications, dimensions, weight, materials, and other relevant information that can help customers to understand the product better. The product details section should also include high-quality images and videos of the product, as well as customer reviews and ratings.",
@@ -346,7 +380,7 @@ export const productData = [
 		stock: 10,
 	},
 	{
-		id: 1,
+		id: "eec4ebde-9585-4582-b5a7-062ebb874b36",
 		name: "Gaming Headphone Asus with mutiple color and free delivery",
 		description:
 			"Product details are a crucial part of any eCommerce website or online marketplace. These details help the potential customers to make an informed decision about the product they are interested in buying. A well-written product description can also be a powerful marketing tool that can help to increase sales.Product details typically include information about the product's features, specifications, dimensions, weight, materials, and other relevant information that can help customers to understand the product better. The product details section should also include high-quality images and videos of the product, as well as customer reviews and ratings.",
@@ -384,7 +418,7 @@ export const productData = [
 		stock: 10,
 	},
 	{
-		id: 2,
+		id: "e4a1e706-00ea-4d91-9195-c5c4772623b6",
 		category: "Mobile and Tablets",
 		name: "Iphone 14 pro max 256 gb ssd and 8 gb ram silver colour",
 		description:
@@ -413,7 +447,7 @@ export const productData = [
 		stock: 10,
 	},
 	{
-		id: 1,
+		id: "010c149b-56b2-44b8-b0aa-13d33fa7889c",
 		category: "Music and Gaming",
 		name: "Gaming Headphone Asus with mutiple color and free delivery",
 		description:
