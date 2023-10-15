@@ -8,6 +8,7 @@ import { ProductDetailType, productData } from '../../static/Data'
 import styles from '../../styles/styles'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
+import CategoryMenu from './CategoryMenu';
 
 
 
@@ -15,7 +16,8 @@ const Header: React.FC = () => {
     const userDetail = useSelector((state: RootState) => state.user);
     const [searchInput, setSearchInput] = useState<string>("");
     const [searchResult, setSearchResult] = useState<ProductDetailType[]>([]);
-    const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false)
+    const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false);
+    const [fixHeader2, setFixHeader2] = useState<boolean>(false);
 
     useEffect(() => {
         const handleSearch = () => {
@@ -26,11 +28,19 @@ const Header: React.FC = () => {
         };
         if (searchInput.length > 0) void handleSearch();
     }, [searchInput]);
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 70) {
+            setFixHeader2(true);
+        } else {
+            setFixHeader2(false);
+        }
+    });
     return (
         <>
             {/* HEADER LINE 1 */}
             <div className="w-full px-[60px] hidden 800px:block" >
-                <div className="h-[50px] my-[20px] flex items-center justify-between">
+                <div className="h-[50px] my-[10px] flex items-center justify-between">
                     <div>
                         <Link to="/home">
                             <ShopIN width="120" />
@@ -43,18 +53,18 @@ const Header: React.FC = () => {
                             placeholder="Search Product..."
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
-                            className={styles.inputStyle}
+                            className={styles.inputStyle + "text-[16]"}
                         />
                         <AiOutlineSearch
                             size={25}
                             className="absolute right-2 top-1.5 cursor-pointer"
                         />
                         {searchInput.length > 0 && searchResult.length !== 0 ? (
-                            <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
+                            <div className="absolute max-h-[50vh] overflow-auto bg-white shadow-md rounded-lg z-20 p-4">
                                 {searchResult &&
                                     searchResult.map((item, index) => {
                                         return (
-                                            <Link to={`/product/?name=${item.name}&id=${item.id}`} key={index}>
+                                            <Link to={`/product/?name=${item.name}&id=${item.id}`} key={index} >
                                                 <div className="w-full flex items-start-py-3">
                                                     <img
                                                         src={`${item.image_Url[0]?.url}`}
@@ -79,10 +89,10 @@ const Header: React.FC = () => {
                 </div>
             </div>
             {/* HEADER LINE 2 */}
-            <div className="w-full px-[60px] my-[20px] bg-primary hidden 800px:block sticky z-10" >
+            <div className={`${fixHeader2 && "fixed top-0 left-0 z-10"} w-full px-[60px] bg-primary hidden 800px:block z-10`} >
                 <div className="h-[50px]  flex justify-between items-end">
                     {/* Category */}
-                    <div className='relative h-[40px] rounded-t-md bg-body-bg '>
+                    <div className='relative h-[45px] rounded-t-md bg-white '>
                         <button className='w-full h-[40px] rounded-t-md flex items-center'
                             onClick={() => { setOpenCategoryMenu(!openCategoryMenu) }}
                         >
@@ -92,11 +102,8 @@ const Header: React.FC = () => {
                         </button>
                         {
                             openCategoryMenu &&
-                            <div className='absolute' onBlur={() => { setOpenCategoryMenu(false) }}>
-                                <p>item </p>
-                                <p>item </p>
-                                <p>item </p>
-                                <p>item </p>
+                            <div className='absolute mt-1' onBlur={() => { setOpenCategoryMenu(false) }}>
+                                <CategoryMenu setIsOpen={setOpenCategoryMenu} />
                             </div>
                         }
                     </div>
