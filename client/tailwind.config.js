@@ -10,6 +10,7 @@ export default {
 			colors: {
 				"primary": "#ff5c35",
 				"primary-light": "#fef4ea",
+				"body-bg": "#fffbf9",
 				"primary-dark": "#f52f00",
 				"primary-transparent": "#ff5c3538",
 				"secondary": "#213343",
