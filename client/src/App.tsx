@@ -15,7 +15,9 @@ interface LayoutPropType {
 const Layout: React.FC<LayoutPropType> = ({ children }) => {
 	return <>
 		<Header />
+		{/* <div className="px-[60px]"> */}
 		{children}
+		{/* </div> */}
 		<div className="h-[1000px]"></div>
 	</>
 }

@@ -9,6 +9,7 @@ import styles from '../../styles/styles'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import CategoryMenu from './CategoryMenu';
+import Navbar from './Navbar';
 
 
 
@@ -90,7 +91,7 @@ const Header: React.FC = () => {
             </div>
             {/* HEADER LINE 2 */}
             <div className={`${fixHeader2 && "fixed top-0 left-0 z-10"} w-full px-[60px] bg-primary hidden 800px:block z-10`} >
-                <div className="h-[50px]  flex justify-between items-end">
+                <div className="h-[50px]  flex  items-end">
                     {/* Category */}
                     <div className='relative h-[45px] rounded-t-md bg-white '>
                         <button className='w-full h-[40px] rounded-t-md flex items-center'
@@ -107,8 +108,9 @@ const Header: React.FC = () => {
                             </div>
                         }
                     </div>
-                    <div className="h-[50px]  flex items-center justify-between">
-                    </div>
+                    {/* Navigation */}
+                    <Navbar />
+
                 </div>
             </div>
         </>
