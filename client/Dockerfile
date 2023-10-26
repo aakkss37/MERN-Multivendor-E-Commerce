@@ -6,17 +6,14 @@ FROM node:18
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json to the working directory
-COPY server/package*.json ./
+#COPY package*.json ./
 COPY . .
 # Install the application dependencies
-WORKDIR /usr/src/app/server
+#WORKDIR /usr/src/app/
 RUN npm install
 
-# Bundle your app source inside the Docker image
-#COPY . .
-
 # Expose the port the app runs on
-EXPOSE 8000
+EXPOSE 5173
 
 # Define the command to run your application
-CMD ["node", "index.js"]
+CMD ["npm", "run", "start"]
