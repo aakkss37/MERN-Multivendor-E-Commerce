@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, ReactNode, useEffect } from "react";
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { AccountActivationPage, HomePage, LoginPage, SignupPage } from "./Routes";
@@ -10,7 +10,7 @@ import { RootState } from "./redux/store";
 import Header from "./UI/Header/Header";
 
 interface LayoutPropType {
-	children: ReactElement<any, any>
+	children: ReactNode | ReactElement | ReactElement[];
 }
 const Layout: React.FC<LayoutPropType> = ({ children }) => {
 	return <>
